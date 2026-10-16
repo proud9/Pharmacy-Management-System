@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PharmPulse Pro - Commercial Pharmacy Management & BI System</title>
+  <meta name="description" content="Next-Generation Commercial Pharmacy Management Suite. Features remote access, FEFO inventory tracking, clinical drug interaction alerts, POS dispensing, and business intelligence.">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/print.css">
+</head>
+<body>
+
+  <div id="app-layout">
+    <!-- ==================== SIDEBAR NAVIGATION ==================== -->
+    <aside id="sidebar">
+      <div class="brand-section">
+        <div class="brand-logo-icon">
+          <!-- Cross / Pill Medical Icon SVG -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/>
+            <path d="m8.5 8.5 7 7"/>
+          </svg>
+        </div>
+        <div class="brand-title-wrap">
+          <h1>PharmPulse</h1>
+          <span class="brand-badge">Enterprise Rx</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-label">Core Operations</div>
+        <a class="nav-item active" data-tab="dashboard" id="nav-dashboard">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          </span>
+          Dashboard & BI
+        </a>
+
+        <a class="nav-item" data-tab="pos" id="nav-pos">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          </span>
+          POS Dispense
+          <span class="kbd-badge">F2</span>
+        </a>
+
+        <a class="nav-item" data-tab="inventory" id="nav-inventory">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          </span>
+          Stock & Batches
+          <span class="nav-badge warning" id="sidebar-low-stock-badge">0</span>
+        </a>
+
+        <a class="nav-item" data-tab="stocktake" id="nav-stocktake">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </span>
+          Stock Take Audit
+        </a>
+
+        <a class="nav-item" data-tab="prescriptions" id="nav-prescriptions">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </span>
+          Digital Rx Queue
+          <span class="nav-badge" id="sidebar-pending-rx-badge">0</span>
+        </a>
+
+        <div class="nav-label">Directories & Records</div>
+        <a class="nav-item" data-tab="patients" id="nav-patients">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          Patients Directory
+        </a>
+
+        <a class="nav-item" data-tab="prescribers" id="nav-prescribers">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5v14"/></svg>
+          </span>
+          Prescribing Doctors
+        </a>
+
+        <a class="nav-item" data-tab="suppliers" id="nav-suppliers">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          </span>
+          Pharma Suppliers
+        </a>
+
+        <div class="nav-label">Intelligence & System</div>
+        <a class="nav-item" data-tab="analytics" id="nav-analytics">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </span>
+          Financial BI & KPIs
+        </a>
+
+        <a class="nav-item" data-tab="admin" id="nav-admin">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+          Remote Security & Audit
+        </a>
+      </nav>
+
+      <!-- Sidebar User Profile Footer -->
+      <div class="sidebar-user-footer">
+        <div class="user-card">
+          <div class="user-avatar" id="sidebar-avatar">EV</div>
+          <div class="user-meta">
+            <div class="user-name" id="sidebar-user-name">Dr. Elena Vance</div>
+            <div class="user-role-badge" id="sidebar-user-role">Super Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================== MAIN APPLICATION CONTAINER ==================== -->
+    <main id="main-content">
+      <!-- Top App Bar -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <div class="page-title-wrap">
+            <h2 id="view-title">Dashboard Overview</h2>
+            <p id="view-subtitle">Real-time commercial pharmacy performance & clinical alerts</p>
+          </div>
+        </div>
+
+        <div class="top-bar-right">
+          <!-- Terminal Status -->
+          <div class="system-status-indicator">
+            <span class="status-dot"></span>
+            <span>Remote Terminal Online</span>
+          </div>
+
+          <!-- Quick Persona Switcher for testing all RBAC roles -->
+          <div class="role-switcher" title="Switch user role to test remote permissions">
+            <label for="demo-role-select" style="color:var(--text-subtle);">Persona:</label>
+            <select id="demo-role-select">
+              <option value="admin">Elena Vance (Super Admin)</option>
+              <option value="dr_sarah">Dr. Sarah (Chief Pharmacist)</option>
+              <option value="marcus_disp">Marcus (Dispenser Tech)</option>
+              <option value="jenny_cash">Jenny (POS Cashier)</option>
+              <option value="alex_inv">Alex (Inventory Controller)</option>
+            </select>
+          </div>
+
+          <!-- Theme Toggle -->
+          <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Light / Dark Mode">
+            <svg id="theme-moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            <svg id="theme-sun-icon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- View Container (Panes) -->
+      <div class="view-container">
+
+        <!-- ==================== 1. DASHBOARD VIEW ==================== -->
+        <section id="view-dashboard" class="tab-pane active">
+          <!-- KPI Metrics Cards Grid -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Today's Revenue</span>
+                <div class="metric-icon-wrap">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+              </div>
+              <div class="metric-value" id="kpi-today-rev">ZK 0.00</div>
+              <div class="metric-subtext">
+                <span class="badge-growth" id="kpi-growth-pct">+0.0%</span> vs yesterday
+              </div>
+            </div>
+
+            <div class="metric-card indigo">
+              <div class="metric-header">
+                <span class="metric-title">Cumulative Gross Profit</span>
+                <div class="metric-icon-wrap">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/></svg>
+                </div>
+              </div>
+              <div class="metric-value" id="kpi-all-profit">ZK 0.00</div>
+              <div class="metric-subtext">
+                <span id="kpi-profit-margin">0.0%</span> margin efficiency
+              </div>
+            </div>
+
+            <div class="metric-card warning">
+              <div class="metric-header">
+                <span class="metric-title">Low Stock Threshold</span>
+                <div class="metric-icon-wrap">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                </div>
+              </div>
+              <div class="metric-value" id="kpi-low-stock">0</div>
+              <div class="metric-subtext">Medications requiring reorder</div>
+            </div>
+
+            <div class="metric-card danger">
+              <div class="metric-header">
+                <span class="metric-title">Batches Expiring Soon</span>
+                <div class="metric-icon-wrap">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+              </div>
+              <div class="metric-value" id="kpi-expiring">0</div>
+              <div class="metric-subtext">Lots expiring within 90 days</div>
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons Bar -->
+          <div style="display:flex; gap:1rem; margin-bottom:2rem; flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="window.pharmApp.switchTab('pos')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+              Open POS Dispense (F2)
+            </button>
+            <button class="btn btn-secondary" onclick="window.pharmApp.openNewBatchModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+              Receive Stock Batch
+            </button>
+            <button class="btn btn-secondary" onclick="window.pharmApp.openNewPrescriptionModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Register Digital Prescription
+            </button>
+            <button class="btn btn-secondary" onclick="window.pharmApp.openNewPatientModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Register New Patient
+            </button>
+          </div>
+
+          <!-- Charts Row -->
+          <div style="display:grid; grid-template-columns: 2fr 1fr; gap:1.5rem; margin-bottom:2rem;">
+            <div class="bi-chart-card">
+              <div class="bi-chart-title-wrap">
+                <div>
+                  <h3 style="font-size:1.05rem; font-weight:800;">14-Day Sales & Profit Trajectory</h3>
+                  <p style="font-size:0.75rem; color:var(--text-muted);">Commercial daily revenue vs. gross margin trend</p>
+                </div>
+                <span class="badge badge-success">Live Sync</span>
+              </div>
+              <div id="dashboard-trend-chart" class="bi-svg-container"></div>
+            </div>
+
+            <div class="bi-chart-card">
+              <div class="bi-chart-title-wrap">
+                <div>
+                  <h3 style="font-size:1.05rem; font-weight:800;">Expiry Risk Financial Radar</h3>
+                  <p style="font-size:0.75rem; color:var(--text-muted);">Cost value of stock near expiration</p>
+                </div>
+              </div>
+              <div id="dashboard-expiry-matrix" style="display:flex; flex-direction:column; gap:0.85rem; justify-content:center; height:200px;">
+                <!-- Populated dynamically via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Fast-Moving Medicines & Critical Inventory Alerts Table -->
+          <div class="table-card">
+            <div class="table-header-toolbar">
+              <div>
+                <h3 style="font-size:1rem; font-weight:800;">Fast-Moving Medications (High Turnover)</h3>
+                <p style="font-size:0.75rem; color:var(--text-muted);">Top pharmaceutical items driven by prescription & OTC demand</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="window.pharmApp.switchTab('inventory')">View Full Catalog →</button>
+            </div>
+            <div class="data-table-container">
+              <table class="data-table" id="dashboard-top-table">
+                <thead>
+                  <tr>
+                    <th>Brand Name</th>
+                    <th>Generic Molecule</th>
+                    <th>Therapeutic Category</th>
+                    <th>Units Sold</th>
+                    <th>Total Revenue</th>
+                    <th>Gross Profit</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-top-tbody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 2. POINT OF SALE (POS) & DISPENSING VIEW ==================== -->
+        <section id="view-pos" class="tab-pane">
+          <div class="pos-layout">
+            <!-- Left Catalog & Scan Area -->
+            <div class="pos-catalog-panel">
+              <div class="pos-search-header">
+                <div class="search-input-wrap">
+                  <span class="search-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  </span>
+                  <input type="text" id="pos-search-input" class="form-input" placeholder="Scan Barcode or Search Brand / Generic name (F3)..." autocomplete="off">
+                  <span class="kbd-badge">F3</span>
+                </div>
+
+                <!-- Therapeutic Category Filter Bar -->
+                <div class="pos-categories-pill-bar" id="pos-category-pills">
+                  <button class="cat-pill active" data-cat="All">All Drugs</button>
+                  <button class="cat-pill" data-cat="Antibiotics">Antibiotics</button>
+                  <button class="cat-pill" data-cat="Cardiovascular">Cardiovascular</button>
+                  <button class="cat-pill" data-cat="Analgesics & Antipyretics">Analgesics</button>
+                  <button class="cat-pill" data-cat="Antidiabetic">Antidiabetic</button>
+                  <button class="cat-pill" data-cat="Gastrointestinal">Gastro</button>
+                  <button class="cat-pill" data-cat="Controlled Substances">Controlled</button>
+                </div>
+              </div>
+
+              <!-- Product Grid -->
+              <div class="pos-catalog-grid" id="pos-products-grid">
+                <!-- Injected via pos.js -->
+              </div>
+            </div>
+
+            <!-- Right Live Dispensing Cart & Safety Warnings -->
+            <div class="pos-cart-panel">
+              <div class="pos-cart-header">
+                <div>
+                  <h3 style="font-size:1.05rem; font-weight:800;">Dispensing Cart</h3>
+                  <span style="font-size:0.75rem; color:var(--text-muted);" id="pos-cart-item-count">0 items selected</span>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="window.posEngine.clearCart()">Clear</button>
+              </div>
+
+              <!-- Patient Profile Selector (Required for Allergy Check) -->
+              <div style="padding:0.85rem 1.25rem 0.25rem;">
+                <label class="input-label">Patient Profile (Allergy & Rx Cross-Check):</label>
+                <div style="display:flex; gap:0.5rem; margin-top:0.25rem;">
+                  <select id="pos-patient-select" class="form-select" style="font-size:0.85rem;">
+                    <option value="">-- Walk-in Outpatient (No Profile) --</option>
+                    <!-- Populated dynamically -->
+                  </select>
+                  <button class="btn btn-secondary btn-sm" onclick="window.pharmApp.openNewPatientModal()" title="Add New Patient Profile">+</button>
+                </div>
+                <div id="pos-patient-allergy-summary" style="font-size:0.75rem; margin-top:0.35rem; color:var(--danger); font-weight:600; display:none;"></div>
+              </div>
+
+              <!-- Dynamic Clinical Safety Alert Banner -->
+              <div id="clinical-safety-alert-container">
+                <!-- Injected when drug-drug interaction or allergy contraindication detected -->
+              </div>
+
+              <!-- Cart Items List -->
+              <div class="pos-cart-items-list" id="pos-cart-items-list">
+                <div style="text-align:center; padding:3rem 1rem; color:var(--text-subtle);">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:0.75rem; opacity:0.5;"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                  <p style="font-weight:600; font-size:0.9rem;">Cart is currently empty</p>
+                  <p style="font-size:0.78rem;">Click medications on the left or scan barcode to add to dispense queue.</p>
+                </div>
+              </div>
+
+              <!-- Cart Calculation & Checkout Actions -->
+              <div class="pos-cart-footer">
+                <div class="cart-summary-line">
+                  <span>Subtotal:</span>
+                  <span id="pos-subtotal" style="font-family:var(--font-mono); font-weight:700;">ZK 0.00</span>
+                </div>
+                <div class="cart-summary-line">
+                  <span>Discount:</span>
+                  <span id="pos-discount" style="font-family:var(--font-mono); font-weight:700;">ZK 0.00</span>
+                </div>
+                <div class="cart-summary-line">
+                  <span>Prescription Tax (4%):</span>
+                  <span id="pos-tax" style="font-family:var(--font-mono); font-weight:700;">ZK 0.00</span>
+                </div>
+                <div class="cart-summary-line total">
+                  <span>Total Amount Due:</span>
+                  <span class="total-val" id="pos-grand-total">ZK 0.00</span>
+                </div>
+
+                <!-- Payment Method Toggle -->
+                <div style="display:flex; gap:0.5rem; margin-top:0.25rem;">
+                  <button class="btn btn-secondary btn-sm flex-1 active pay-method-btn" data-method="Cash">Cash</button>
+                  <button class="btn btn-secondary btn-sm flex-1 pay-method-btn" data-method="Card">Card</button>
+                  <button class="btn btn-secondary btn-sm flex-1 pay-method-btn" data-method="Insurance">Insurance</button>
+                  <button class="btn btn-secondary btn-sm flex-1 pay-method-btn" data-method="Mobile Money">Mobile</button>
+                </div>
+
+                <!-- Cash Tender Input (When Cash is selected) -->
+                <div id="cash-tender-wrap" style="display:flex; gap:0.5rem; align-items:center;">
+                  <input type="number" id="pos-amount-tendered" class="form-input" placeholder="Amount Tendered (ZK)" step="0.50" style="font-size:0.85rem;">
+                  <div style="font-size:0.85rem; font-weight:700; white-space:nowrap; color:var(--text-muted);">
+                    Change: <span id="pos-change-due" style="color:var(--primary); font-family:var(--font-mono);">ZK 0.00</span>
+                  </div>
+                </div>
+
+                <button class="btn btn-primary" id="pos-checkout-btn" onclick="window.posEngine.processCheckout()" style="padding:0.85rem; font-size:1rem;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  Complete Dispense & Print Receipt
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 3. INVENTORY & BATCH MANAGEMENT VIEW ==================== -->
+        <section id="view-inventory" class="tab-pane">
+          <div class="table-card">
+            <div class="table-header-toolbar">
+              <div style="display:flex; align-items:center; gap:1rem; flex:1; max-width:600px;">
+                <div class="search-input-wrap" style="flex:1;">
+                  <span class="search-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  </span>
+                  <input type="text" id="inventory-search-input" class="form-input" placeholder="Search catalog by Brand, Generic, SKU, or Barcode...">
+                </div>
+
+                <select id="inventory-filter-status" class="form-select" style="max-width:180px;">
+                  <option value="">All Stock Status</option>
+                  <option value="low_stock">Low Stock (≤ Reorder)</option>
+                  <option value="expiring">Expiring Soon (≤ 90d)</option>
+                  <option value="out_of_stock">Out of Stock</option>
+                </select>
+              </div>
+
+              <div style="display:flex; gap:0.75rem;">
+                <button class="btn btn-secondary" onclick="window.pharmApp.exportCsv('inventory')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                  Export CSV
+                </button>
+                <button class="btn btn-secondary" onclick="window.pharmApp.openNewBatchModal()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                  Add Batch
+                </button>
+                <button class="btn btn-primary" onclick="window.pharmApp.openNewMedicineModal()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                  Register Medication
+                </button>
+              </div>
+            </div>
+
+            <div class="data-table-container">
+              <table class="data-table" id="inventory-table">
+                <thead>
+                  <tr>
+                    <th>SKU / Barcode</th>
+                    <th>Brand & Generic Name</th>
+                    <th>Category</th>
+                    <th>Form & Strength</th>
+                    <th>Total Stock</th>
+                    <th>FEFO Nearest Expiry</th>
+                    <th>Cost (ZK)</th>
+                    <th>Price (ZK)</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-tbody">
+                  <!-- Populated via inventory.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 4. PHYSICAL STOCK TAKE & AUDIT VIEW ==================== -->
+        <section id="view-stocktake" class="tab-pane">
+          <div class="table-card">
+            <div class="table-header-toolbar">
+              <div>
+                <h3 style="font-size:1.05rem; font-weight:800;">Physical Stock Audits & Discrepancy Reconciliation</h3>
+                <p style="font-size:0.75rem; color:var(--text-muted);">Cycle count reconciliation with automated variance detection and inventory adjustment</p>
+              </div>
+              <button class="btn btn-primary" onclick="window.stocktakeEngine.startNewAudit()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                Initiate New Stock Take
+              </button>
+            </div>
+
+            <div class="data-table-container">
+              <table class="data-table" id="stocktake-list-table">
+                <thead>
+                  <tr>
+                    <th>Audit Code</th>
+                    <th>Audit Title</th>
+                    <th>Auditor</th>
+                    <th>Started Date</th>
+                    <th>Status</th>
+                    <th>Items Audited</th>
+                    <th>Net Discrepancy (ZK)</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="stocktake-list-tbody">
+                  <!-- Populated via stocktake.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Active Audit Sheet (Rendered when viewing an open/reconciled stock take) -->
+          <div id="stocktake-active-sheet" class="table-card" style="display:none;">
+            <div class="table-header-toolbar" style="background:var(--bg-surface-elevated);">
+              <div>
+                <h3 id="active-audit-title" style="font-size:1.1rem; font-weight:800;">Audit Sheet</h3>
+                <p id="active-audit-meta" style="font-size:0.8rem; color:var(--text-muted);"></p>
+              </div>
+              <div style="display:flex; gap:0.75rem;">
+                <button class="btn btn-secondary" onclick="document.getElementById('stocktake-active-sheet').style.display='none'">Close Sheet</button>
+                <button class="btn btn-primary" id="reconcile-audit-btn" onclick="window.stocktakeEngine.reconcileActiveAudit()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  Commit & Reconcile Variances
+                </button>
+              </div>
+            </div>
+
+            <div class="data-table-container">
+              <table class="data-table" id="stocktake-sheet-table">
+                <thead>
+                  <tr>
+                    <th>Medicine & Batch #</th>
+                    <th>Expiry Date</th>
+                    <th>System Expected Qty</th>
+                    <th>Physical Count Counted</th>
+                    <th>Variance</th>
+                    <th>Unit Cost</th>
+                    <th>Variance Value (ZK)</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody id="stocktake-sheet-tbody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 5. DIGITAL PRESCRIPTIONS VIEW ==================== -->
+        <section id="view-prescriptions" class="tab-pane">
+          <div class="table-card">
+            <div class="table-header-toolbar">
+              <div style="display:flex; align-items:center; gap:1rem;">
+                <select id="rx-status-filter" class="form-select" style="max-width:200px;">
+                  <option value="All">All Statuses</option>
+                  <option value="Pending">Pending Verification</option>
+                  <option value="Verified">Verified (Ready to Dispense)</option>
+                  <option value="Dispensed">Dispensed</option>
+                </select>
+              </div>
+
+              <button class="btn btn-primary" onclick="window.pharmApp.openNewPrescriptionModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                New Digital Prescription
+              </button>
+            </div>
+
+            <div class="data-table-container">
+              <table class="data-table" id="prescriptions-table">
+                <thead>
+                  <tr>
+                    <th>Rx Number</th>
+                    <th>Patient Name</th>
+                    <th>Prescribing Doctor</th>
+                    <th>Date</th>
+                    <th>Medications</th>
+                    <th>Status</th>
+                    <th>Verification</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="prescriptions-tbody">
+                  <!-- Populated via prescriptions.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 6. PATIENTS DIRECTORY VIEW ==================== -->
+        <section id="view-patients" class="tab-pane">
+          <div class="table-card">
+            <div class="table-header-toolbar">
+              <div class="search-input-wrap" style="flex:1; max-width:400px;">
+                <span class="search-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </span>
+                <input type="text" id="patients-search-input" class="form-input" placeholder="Search patient name, code, phone...">
+              </div>
+              <button class="btn btn-primary" onclick="window.pharmApp.openNewPatientModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                Register Patient
+              </button>
+            </div>
+
+            <div class="data-table-container">
+              <table class="data-table" id="patients-table">
+                <thead>
+                  <tr>
+                    <th>Patient Code</th>
+                    <th>Full Name</th>
+                    <th>DOB / Gender</th>
+                    <th>Contact Phone</th>
+                    <th>Known Drug Allergies</th>
+                    <th>Chronic Conditions</th>
+                    <th>Insurance Provider</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="patients-tbody">
+                  <!-- Populated via records.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 7. PRESCRIBING DOCTORS VIEW ==================== -->
+        <section id="view-prescribers" class="tab-pane">
+          <div class="table-card">
+            <div class="table-header-toolbar">
+              <h3 style="font-size:1.05rem; font-weight:800;">Prescribing Physicians Directory</h3>
+              <button class="btn btn-primary" onclick="window.recordsEngine.openNewPrescriberModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                Register Doctor
+              </button>
+            </div>
+            <div class="data-table-container">
+              <table class="data-table" id="prescribers-table">
+                <thead>
+                  <tr>
+                    <th>Doctor Name</th>
+                    <th>License #</th>
+                    <th>Hospital / Clinic Affiliation</th>
+                    <th>Specialty</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody id="prescribers-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 8. SUPPLIERS VIEW ==================== -->
+        <section id="view-suppliers" class="tab-pane">
+          <div class="table-card">
+            <div class="table-header-toolbar">
+              <h3 style="font-size:1.05rem; font-weight:800;">Pharmaceutical Suppliers & Distributors</h3>
+              <button class="btn btn-primary" onclick="window.recordsEngine.openNewSupplierModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                Add Supplier
+              </button>
+            </div>
+            <div class="data-table-container">
+              <table class="data-table" id="suppliers-table">
+                <thead>
+                  <tr>
+                    <th>Supplier Name & Code</th>
+                    <th>Contact Person</th>
+                    <th>Phone & Email</th>
+                    <th>Address</th>
+                    <th>Lead Time</th>
+                    <th>Payment Terms</th>
+                  </tr>
+                </thead>
+                <tbody id="suppliers-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 9. FINANCIAL BI & ANALYTICS VIEW ==================== -->
+        <section id="view-analytics" class="tab-pane">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+            <div>
+              <h3 style="font-size:1.25rem; font-weight:800;">Commercial Business Intelligence & Financial Analytics</h3>
+              <p style="font-size:0.8rem; color:var(--text-muted);">Executive margin analysis, inventory turnover, and predictive restocking</p>
+            </div>
+            <div style="display:flex; gap:0.75rem;">
+              <button class="btn btn-secondary" onclick="window.pharmApp.exportCsv('sales')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Export Sales CSV
+              </button>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
+            <div class="bi-chart-card">
+              <div class="bi-chart-title-wrap">
+                <h4 style="font-weight:800;">Therapeutic Category Revenue Breakdown</h4>
+              </div>
+              <div id="analytics-category-chart" class="bi-svg-container"></div>
+            </div>
+
+            <div class="bi-chart-card">
+              <div class="bi-chart-title-wrap">
+                <h4 style="font-weight:800;">Payment Gateway & Method Distribution</h4>
+              </div>
+              <div id="analytics-payment-chart" class="bi-svg-container"></div>
+            </div>
+          </div>
+
+          <!-- Top Generating Drugs Table -->
+          <div class="table-card">
+            <div class="table-header-toolbar">
+              <h3 style="font-size:1rem; font-weight:800;">High Volume vs High Margin Performance Matrix</h3>
+            </div>
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Medication Brand</th>
+                    <th>Generic Molecule</th>
+                    <th>Category</th>
+                    <th>Units Sold</th>
+                    <th>Revenue (ZK)</th>
+                    <th>Profit Contribution (ZK)</th>
+                  </tr>
+                </thead>
+                <tbody id="analytics-top-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== 10. REMOTE SECURITY & AUDIT VIEW ==================== -->
+        <section id="view-admin" class="tab-pane">
+          <!-- Active Remote Sessions -->
+          <div class="table-card" style="margin-bottom:2rem;">
+            <div class="table-header-toolbar">
+              <div>
+                <h3 style="font-size:1.05rem; font-weight:800;">Active Remote Terminal Sessions</h3>
+                <p style="font-size:0.75rem; color:var(--text-muted);">Real-time remote login monitoring with instant session termination</p>
+              </div>
+            </div>
+            <div class="data-table-container">
+              <table class="data-table" id="admin-sessions-table">
+                <thead>
+                  <tr>
+                    <th>User & Role</th>
+                    <th>IP Address</th>
+                    <th>Device Station</th>
+                    <th>Login Timestamp</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-sessions-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tamper-Evident Security Audit Logs -->
+          <div class="table-card">
+            <div class="table-header-toolbar">
+              <div>
+                <h3 style="font-size:1.05rem; font-weight:800;">Immutable Security & Audit Trail</h3>
+                <p style="font-size:0.75rem; color:var(--text-muted);">Timestamped logging of clinical verifications, stock adjustments, and sales</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="window.pharmApp.exportCsv('audit')">Export Audit CSV</button>
+            </div>
+            <div class="data-table-container">
+              <table class="data-table" id="admin-audit-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Staff User</th>
+                    <th>Action</th>
+                    <th>Entity</th>
+                    <th>Entity ID</th>
+                    <th>Audit Details</th>
+                    <th>Terminal IP</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-audit-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ==================== MODALS CONTAINER ==================== -->
+
+  <!-- Modal 1: Register New Medicine -->
+  <div class="modal-overlay" id="modal-medicine">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Register New Pharmaceutical Medication</h3>
+        <button class="btn btn-secondary btn-icon" onclick="window.pharmApp.closeModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-medicine">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Brand Trade Name *</label>
+              <input type="text" id="med-brand-name" class="form-input" required placeholder="e.g. Lipitor Elite">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Generic Chemical Molecule *</label>
+              <input type="text" id="med-generic-name" class="form-input" required placeholder="e.g. Atorvastatin">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Category</label>
+              <select id="med-category" class="form-select">
+                <option value="Antibiotics">Antibiotics</option>
+                <option value="Cardiovascular">Cardiovascular</option>
+                <option value="Analgesics & Antipyretics">Analgesics & Antipyretics</option>
+                <option value="Antidiabetic">Antidiabetic</option>
+                <option value="Gastrointestinal">Gastrointestinal</option>
+                <option value="Respiratory">Respiratory</option>
+                <option value="Controlled Substances">Controlled Substances</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Dosage Form</label>
+              <input type="text" id="med-dosage-form" class="form-input" placeholder="e.g. Tablet, Capsule">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Strength</label>
+              <input type="text" id="med-strength" class="form-input" placeholder="e.g. 500mg, 100mcg">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Unit Cost (ZK) *</label>
+              <input type="number" id="med-unit-cost" class="form-input" step="0.01" required placeholder="4.50">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Unit Selling Price (ZK) *</label>
+              <input type="number" id="med-unit-price" class="form-input" step="0.01" required placeholder="12.00">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Reorder Min Threshold</label>
+              <input type="number" id="med-reorder-level" class="form-input" value="20">
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1.5rem; margin-top:0.5rem; margin-bottom:0.75rem;">
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; cursor:pointer;">
+              <input type="checkbox" id="med-requires-rx"> Requires Doctor's Prescription
+            </label>
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; cursor:pointer;">
+              <input type="checkbox" id="med-is-controlled"> Controlled Substance (Schedule IV)
+            </label>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Clinical Administration Instructions</label>
+            <textarea id="med-instructions" class="form-textarea" rows="2" placeholder="Take 1 tablet daily with food..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.pharmApp.closeModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="window.inventoryEngine.submitNewMedicine()">Register Medication</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Add Inventory Batch Intake -->
+  <div class="modal-overlay" id="modal-batch">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Receive Stock Intake Batch (Lot Number)</h3>
+        <button class="btn btn-secondary btn-icon" onclick="window.pharmApp.closeModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-batch">
+          <div class="input-group">
+            <label class="input-label">Select Medication *</label>
+            <select id="batch-med-select" class="form-select" required></select>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Batch / Lot Number *</label>
+              <input type="text" id="batch-number-input" class="form-input" required placeholder="e.g. BATCH-2026-901">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Intake Quantity (Packs/Units) *</label>
+              <input type="number" id="batch-quantity-input" class="form-input" min="1" required placeholder="100">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Manufacture Date</label>
+              <input type="date" id="batch-mfg-date" class="form-input">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Expiration Date (FEFO) *</label>
+              <input type="date" id="batch-expiry-date" class="form-input" required>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Purchase Unit Cost (ZK)</label>
+              <input type="number" id="batch-cost-input" class="form-input" step="0.01" placeholder="4.20">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Supplier Source</label>
+              <select id="batch-supplier-select" class="form-select"></select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.pharmApp.closeModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="window.inventoryEngine.submitNewBatch()">Confirm Stock Intake</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Quick Stock Adjustment -->
+  <div class="modal-overlay" id="modal-adjust">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Inventory Adjustment / Write-Off</h3>
+        <button class="btn btn-secondary btn-icon" onclick="window.pharmApp.closeModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="adjust-batch-id">
+        <p id="adjust-batch-desc" style="font-size:0.9rem; font-weight:700; margin-bottom:1rem;"></p>
+
+        <div class="input-group">
+          <label class="input-label">Adjustment Type</label>
+          <select id="adjust-type" class="form-select">
+            <option value="Damaged">Damaged / Broken Packaging</option>
+            <option value="Expired Disposal">Expired Stock Safe Disposal</option>
+            <option value="Supplier Return">Supplier Return / Recall</option>
+            <option value="Correction">Audit Count Correction</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Quantity Change (Use negative number to write-off) *</label>
+          <input type="number" id="adjust-qty" class="form-input" placeholder="-5">
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Justification / Reason *</label>
+          <textarea id="adjust-reason" class="form-textarea" rows="2" placeholder="Explain the reason for inventory change..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.pharmApp.closeModals()">Cancel</button>
+        <button class="btn btn-danger" onclick="window.inventoryEngine.submitStockAdjustment()">Apply Adjustment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: New Digital Prescription -->
+  <div class="modal-overlay" id="modal-prescription">
+    <div class="modal-card" style="max-width:750px;">
+      <div class="modal-header">
+        <h3>Create Digital E-Prescription</h3>
+        <button class="btn btn-secondary btn-icon" onclick="window.pharmApp.closeModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-prescription">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Patient *</label>
+              <select id="rx-patient-select" class="form-select" required></select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Prescribing Physician *</label>
+              <select id="rx-prescriber-select" class="form-select" required></select>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Clinical Diagnosis</label>
+            <input type="text" id="rx-diagnosis-input" class="form-input" placeholder="e.g. Acute Bronchitis, Type 2 Diabetes Mellitus">
+          </div>
+
+          <div style="margin-top:1rem; margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+            <label class="input-label">Prescription Medications:</label>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="window.prescriptionEngine.addRxRow()">+ Add Medication</button>
+          </div>
+
+          <div id="rx-items-container" style="display:flex; flex-direction:column; gap:0.75rem;">
+            <!-- Rows dynamically added -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.pharmApp.closeModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="window.prescriptionEngine.submitPrescription()">Register Prescription</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Register Patient -->
+  <div class="modal-overlay" id="modal-patient">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Register New Patient Medical Profile</h3>
+        <button class="btn btn-secondary btn-icon" onclick="window.pharmApp.closeModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-patient">
+          <div class="input-group">
+            <label class="input-label">Full Name *</label>
+            <input type="text" id="patient-name" class="form-input" required placeholder="e.g. Arthur Pendelton">
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Date of Birth</label>
+              <input type="date" id="patient-dob" class="form-input">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Gender</label>
+              <select id="patient-gender" class="form-select">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Phone Number</label>
+              <input type="text" id="patient-phone" class="form-input" placeholder="+1-555-0199">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Email</label>
+              <input type="email" id="patient-email" class="form-input" placeholder="patient@example.com">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" style="color:var(--danger); font-weight:800;">Known Drug Allergies (Crucial for Safety Warning Engine)</label>
+            <input type="text" id="patient-allergies" class="form-input" placeholder="e.g. Penicillin, Sulfa drugs, Aspirin (comma-separated)">
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Chronic Conditions</label>
+            <input type="text" id="patient-conditions" class="form-input" placeholder="e.g. Hypertension, Type 2 Diabetes">
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="input-group">
+              <label class="input-label">Insurance Provider</label>
+              <input type="text" id="patient-insurance" class="form-input" placeholder="e.g. BlueCross BlueShield">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Policy Number</label>
+              <input type="text" id="patient-policy" class="form-input" placeholder="BCBS-991204">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.pharmApp.closeModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="window.recordsEngine.submitPatient()">Save Patient</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: Printable Thermal POS Receipt Modal -->
+  <div class="modal-overlay" id="modal-receipt">
+    <div class="modal-card" style="max-width:380px;">
+      <div class="modal-header">
+        <h3>POS Thermal Receipt</h3>
+        <button class="btn btn-secondary btn-icon" onclick="window.pharmApp.closeModals()">✕</button>
+      </div>
+      <div class="modal-body" style="padding:1rem;">
+        <div id="receipt-preview-content"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.pharmApp.closeModals()">Close</button>
+        <button class="btn btn-primary" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+          Print Thermal 80mm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container for clean 80mm thermal print rendering -->
+  <div id="printable-receipt-container"></div>
+
+  <!-- Scripts -->
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/pos.js"></script>
+  <script src="/static/js/inventory.js"></script>
+  <script src="/static/js/stocktake.js"></script>
+  <script src="/static/js/prescriptions.js"></script>
+  <script src="/static/js/records.js"></script>
+  <script src="/static/js/analytics.js"></script>
+  <script src="/static/js/admin.js"></script>
+</body>
+</html>
